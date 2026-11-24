@@ -1,0 +1,17 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Temporary download files and chunks
+chunks/
+*.part
+*.tmp
+DOWNLOAD_STATUS.json
+
+# Logs & Environment
+*.log
+.env
+.venv
+env/
+venv/
