@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
-# CLI wrapper for turbo_download.py
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# Canonical path resolution for symlinks
+TARGET="${BASH_SOURCE[0]}"
+while [ -h "$TARGET" ]; do
+    DIR="$(cd -P "$(dirname "$TARGET")" && pwd)"
+    TARGET="$(readlink "$TARGET")"
+    [[ $TARGET != /* ]] && TARGET="$DIR/$TARGET"
+done
+SCRIPT_DIR="$(cd -P "$(dirname "$TARGET")/.." && pwd)"
 exec python3 "$SCRIPT_DIR/scripts/turbo_download.py" "$@"
