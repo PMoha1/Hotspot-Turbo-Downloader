@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# CLI wrapper for turbo_download.py
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+exec python3 "$SCRIPT_DIR/scripts/turbo_download.py" "$@"

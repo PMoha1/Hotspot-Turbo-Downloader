@@ -21,6 +21,40 @@
 
 ---
 
+## ⚡ التثبيت الفوري لأي وكيل ذكاء اصطناعي (One-Liner Agent Install)
+
+يمكن لأي مستخدم أو وكيل ذكاء اصطناعي (Antigravity / Hermes Agent / Claude / Cursor) تثبيت وتشغيل الأداة مباشرة بأمر واحد:
+
+### 🐧 على أنظمة Linux & macOS:
+```bash
+curl -sSL https://raw.githubusercontent.com/PMoha1/Hotspot-Turbo-Downloader/main/install.sh | bash
+```
+
+### 🪟 على أنظمة Windows (PowerShell):
+```powershell
+irm https://raw.githubusercontent.com/PMoha1/Hotspot-Turbo-Downloader/main/install.ps1 | iex
+```
+
+> **ماذا يفعل سكربت التثبيت التلقائي؟**  
+> يقوم بنسخ المستودع إلى مجلد مهارات الوكلاء القياسي (`~/.gemini/config/skills/hotspot-turbo-downloader` ومجلدات Hermes و Claude)، وإنشاء أوامر النظام المباشرة (`fast-download` و `hotspot-sentinel`) داخل مسار المستخدم لتصبح متاحة فوراً لأي وكيل أو طرفية.
+
+---
+
+## 🤖 تسليح أي وكيل ذكاء اصطناعي (Agent Prompt Snippet)
+
+إذا كنت تستخدم وكيلاً خارجياً (مثل Claude Code, ChatGPT, Hermes Agent, OpenCode, Cursor)، ما عليك سوى نسخ المقطع التالي ولصقه في تعليمات الوكيل (System Prompt):
+
+```markdown
+### 🚀 Turbo Downloader Skill Integration:
+- Whenever the user asks to download large files, LLM models (GGUF/SafeTensors), or bypass Mikrotik captive portals, use the pre-installed fast downloader:
+  Command: `fast-download --url "<URL>" --dest "<DIR>" --streams 32 --verify-gguf`
+- To monitor Mikrotik hotspot balance and auto-switch cards silently without disconnections:
+  Command: `hotspot-sentinel --cards "CARD1,CARD2,CARD3"`
+- Status tracking: Read `DOWNLOAD_STATUS.json` for real-time speed, bytes, and ETA.
+```
+
+---
+
 ## 💡 السياق الميداني والمشكلة الحقيقية (The Real-World Dilemma)
 
 ### 🇾🇪 معضلة شبكات الميكروتك وبطاقات الحصص المحدودة (مثال: اليمن)
@@ -86,6 +120,9 @@ flowchart TD
 
 | الملف | الوظيفة |
 |---|---|
+| **`install.sh`** / **`install.ps1`** | سكربت التثبيت التلقائي بنقرة واحدة لأنظمة Linux و Windows لربط المهارة بأي وكيل فوراً. |
+| **`bin/fast-download`** | أمر الاختصار السريع لتشغيل المحرك مباشرة من أي مسار بالطرفية دون الحاجة لاستدعاء مسار بايثون الكامل. |
+| **`bin/hotspot-sentinel`** | أمر الاختصار السريع لتشغيل حارس رصيد الميكروتك ومراقبة الكروت. |
 | **`scripts/turbo_download.py`** | محرك التنزيل متعدد المسارات (يدعم 32 حتى 200 مسار، الاستئناف بالبايت، الدمج فائق السرعة، والتحقق من ملفات GGUF). |
 | **`scripts/hotspot_sentinel.py`** | حارس الكروت التلقائي (يراقب الرصيد، يطبق قاعدة التبديل الذهبية `/logout` ثم `/login` عند بلوغ 35MB). |
 | **`scripts/setup_network.sh`** | إعداد توجيه المسارات السياسية (QoS Table 102 للإيثرنت و Metric 50 للواي فاي) ومصفوفة الآيبيات الفرعية. |
