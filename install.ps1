@@ -27,8 +27,18 @@ if (Test-Path "$InstallDir\.git") {
     git clone --quiet $RepoUrl $InstallDir
 }
 
+$BinDir = "$InstallDir\bin"
+
+# إضافة مسار الأدوات إلى متغيرات البيئة (User PATH) لتعمل من Run والطرفية مباشرة
+$CurrentPath = [Environment]::GetEnvironmentVariable("Path", "User")
+if ($CurrentPath -notlike "*$BinDir*") {
+    Write-Host "[🔗] إضافة مسار الأدوات إلى متغيرات البيئة (User PATH)..." -ForegroundColor Cyan
+    [Environment]::SetEnvironmentVariable("Path", "$CurrentPath;$BinDir", "User")
+    $env:Path += ";$BinDir"
+}
+
 Write-Host "==================================================================" -ForegroundColor Cyan
 Write-Host "✅ اكتمل التثبيت بنجاح على Windows!" -ForegroundColor Green
-Write-Host "📌 الاستخدام عبر بايثون أو الوكيل:" -ForegroundColor White
-Write-Host "   python $InstallDir\scripts\turbo_download.py --url <URL>" -ForegroundColor Yellow
+Write-Host "📌 يمكنك الآن تشغيل الأداة مباشرة من أي موجه أوامر (CMD / PowerShell) أو من Win + R:" -ForegroundColor White
+Write-Host "   fast-download --url <URL>" -ForegroundColor Yellow
 Write-Host "==================================================================" -ForegroundColor Cyan
